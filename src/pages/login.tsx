@@ -3,32 +3,32 @@
 import { ReactElement } from 'react'
 import Layout from '../layouts/layout'
 import type { NextPageWithLayout } from './_app'
-import LoginForm from '../components/auth/LoginForm';
-import { useRouter } from 'next/router';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { useState } from 'react';
+import LoginForm from '../components/auth/LoginForm'
+import { useRouter } from 'next/router'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useState } from 'react'
 
 /**
  * Login page
- * 
+ *
  * @return {JSX.Element} The login form
  */
 const Login = () => {
-	const router = useRouter();
-	const supabase = createClientComponentClient();
+	const router = useRouter()
+	const supabase = createClientComponentClient()
 
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 
 	const handleSignIn = async () => {
 		await supabase.auth.signInWithPassword({
 			email,
 			password,
-		});
-		router.push('/profile');
-	};
+		})
+		router.push('/profile')
+	}
 
-	return(
+	return (
 		<>
 			<LoginForm
 				handleSignIn={handleSignIn}
@@ -38,16 +38,12 @@ const Login = () => {
 				password={password}
 			/>
 		</>
-	);
+	)
 }
 
 const getLayout = (page: ReactElement) => {
-	return (
-		<Layout>
-			{page}
-		</Layout>
-	);
-};
+	return <Layout>{page}</Layout>
+}
 
 const Page: NextPageWithLayout = () => {
 	return (
@@ -56,9 +52,9 @@ const Page: NextPageWithLayout = () => {
 				<Login />
 			</div>
 		</>
-	);
+	)
 }
 
-Page.getLayout = getLayout;
+Page.getLayout = getLayout
 
-export default Page;
+export default Page

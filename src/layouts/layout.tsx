@@ -1,8 +1,8 @@
-import Navbar from '../components/Navbar';
-import Container from '@/components/Container';
-import Footer from '../components/Footer';
+import Navbar from '../components/Navbar'
+import Container from '@/components/Container'
+import Footer from '../components/Footer'
 
-const Layout = ({ children } : {children: React.ReactNode}) => { 
+const Layout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<>
 			<Navbar />
@@ -10,6 +10,6 @@ const Layout = ({ children } : {children: React.ReactNode}) => {
 			<Footer />
 		</>
 	)
-};
+}
 
-export default Layout;
+export default Layout

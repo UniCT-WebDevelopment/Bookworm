@@ -1,15 +1,15 @@
-import { IconContext } from "react-icons";
-import { BiSolidUserCircle } from "react-icons/bi";
+import { IconContext } from 'react-icons'
+import { BiSolidUserCircle } from 'react-icons/bi'
 
-import Searchbar from "./Searchbar";
+import Searchbar from './Searchbar'
 
 const Navbar = () => {
 	const menuItems = [
 		{
-			name: "",
-			link: "",
+			name: '',
+			link: '',
 		},
-	];
+	]
 
 	return (
 		<nav className="navbar flex justify-between bg-gradient-to-r from-salmon to-mauve text-ghostwhite font-semibold h-8">
@@ -24,7 +24,7 @@ const Navbar = () => {
 					))}
 					<li>
 						<a href="/login">
-							<IconContext.Provider value={{ size: "2rem" }}>
+							<IconContext.Provider value={{ size: '2rem' }}>
 								<BiSolidUserCircle />
 							</IconContext.Provider>
 						</a>
@@ -32,7 +32,7 @@ const Navbar = () => {
 				</ul>
 			</div>
 		</nav>
-	);
-};
+	)
+}
 
-export default Navbar;
+export default Navbar
