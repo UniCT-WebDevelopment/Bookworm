@@ -58,7 +58,7 @@ const Searchbar = () => {
 	return (
 		<div className="searchbar md:basis-2/5">
 			<input
-				className="w-full outline-none rounded-sm border-none text-neutral-800 h-8 px-2"
+				className="w-full outline-none rounded-sm border-none bg-base-100 text-neutral-800 h-12 px-2"
 				type="text"
 				placeholder="Search books..."
 				id="searchbar"
@@ -72,7 +72,7 @@ const Searchbar = () => {
 				}}
 			/>
 			<button
-				className="flex place-items-center justify-center bg-neutral-200 bg-opacity-30 hover:bg-opacity-50 w-14 h-8 rounded-sm mx-2 disabled:bg-opacity-80 color:neutral-200 disabled:bg-color:neutral-300"
+				className="flex place-items-center justify-center btn btn-circle ml-4 bg-primary-focus hover:bg-accent border-none"
 				onClick={search}
 				disabled={searched.length === 0}
 			>

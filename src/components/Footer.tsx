@@ -4,7 +4,7 @@ import { BiLogoTelegram } from 'react-icons/bi'
 
 const Footer = () => {
 	return (
-		<footer className="footer footer-center p-10 bg-gradient-to-r from-salmon to-mauve text-base-content">
+		<footer className="footer footer-center p-10 text-base-content bg-primary">
 			<div className="grid grid-flow-col gap-4">
 				<a className="link link-hover">About us</a>
 				<a className="link link-hover">Contact</a>
