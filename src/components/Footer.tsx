@@ -1,22 +1,21 @@
 import { IconContext } from 'react-icons'
 import { BiLogoGithub } from 'react-icons/bi'
 import { BiLogoTelegram } from 'react-icons/bi'
+import Link from 'next/link'
 
 const Footer = () => {
 	return (
 		<footer className="footer footer-center p-10 text-base-content bg-primary">
 			<div className="grid grid-flow-col gap-4">
-				<a className="link link-hover">About us</a>
-				<a className="link link-hover">Contact</a>
-				<a className="link link-hover">Jobs</a>
-				<a className="link link-hover">Press kit</a>
+				<Link className="link link-hover" href="/about">About</Link>
+				<Link className="link link-hover" href="/contact">Contact</Link>
 			</div>
 			<div>
 				<div className="grid grid-flow-col gap-4">
 					<IconContext.Provider value={{ size: '2.5rem' }}>
-						<a>
+						<Link href={"https://github.com/makapx/bookworm-nextjs"} target='_blank'>
 							<BiLogoGithub />
-						</a>
+						</Link>
 						<a>
 							<BiLogoTelegram />
 						</a>

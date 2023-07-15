@@ -22,6 +22,7 @@ module.exports = {
 			"cupcake",
 			"coffee",
 			"pastel",
+			"halloween",
 			{
 				bookworm: {
 					"primary": "#84A59D",

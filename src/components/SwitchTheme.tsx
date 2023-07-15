@@ -9,7 +9,11 @@ import {BiPaint} from "react-icons/bi";
 const SwitchTheme = () => {
 	const supportedThemes = [
 		// Add more themes here
-		"bookworm"
+		"bookworm",
+		"light",
+		"dark",
+		"cupcake",
+		"coffee",
 	];
 	const [theme, setTheme] = useState("bookworm");
 
