@@ -11,7 +11,7 @@ const SwitchTheme = () => {
 		// Add more themes here
 		"bookworm"
 	];
-	const [theme, setTheme] = useState("light");
+	const [theme, setTheme] = useState("bookworm");
 
 	// TODO: Add a way to save the theme in local storage or to the user's account
 

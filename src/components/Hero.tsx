@@ -31,7 +31,7 @@ const Hero = () => {
 					<h1 className="text-5xl font-bold">
 						Welcome to <span className="text-primary">Bookworm</span>
 					</h1>
-					<p className="py-6 max-w-lg h-max">
+					<p className="py-6 max-w-lg h-24">
 						{currentText}
 					</p>
 					<Link href="/signup">
