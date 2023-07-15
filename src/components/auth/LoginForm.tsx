@@ -1,3 +1,4 @@
+import Link from 'next/link';
 /**
  * This component is the login form
  * 
@@ -28,9 +29,7 @@ const LoginForm = (props : any) => {
 			</button>
 			<p className="mt-4">
 				You don&apos;t have an account?
-				<a className="cursor-pointer px-2 text-primary" href="/signup">
-					Sign up
-				</a>
+				<Link href="/signup" className="cursor-pointer px-2 text-primary"> Signup </Link>
 			</p>
 		</div>
 	);
