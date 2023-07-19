@@ -15,13 +15,12 @@ const Navbar = () => {
 	]
 
 	return (
-		<nav className="navbar bg-primary flex justify-between font-semibold h-8">
+		<nav className="navbar bg-primary sticky top-0 z-50 flex justify-between font-semibold h-8">
 			<div className="logo">
 				<Link href="/">
 					<Image src={logo} alt="logo" width={80}/>
 				</Link>
 			</div>
-			<Searchbar />
 			<div>
 				<ul className="flex gap-2">
 					{menuItems.map((item, index) => (
@@ -29,6 +28,9 @@ const Navbar = () => {
 							<a href={item.link}>{item.name}</a>
 						</li>
 					))}
+					<li>
+						<Searchbar />
+					</li>
 					<li>
 						<button className="btn btn-circle bg-primary-focus hover:bg-accent border-none">
 							<Link href="/profile">
