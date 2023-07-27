@@ -23,7 +23,6 @@ const Contact = () => {
 	)
 };
 
-
 const getLayout = (page: ReactElement) => {
 	return <Layout>{page}</Layout>
 }

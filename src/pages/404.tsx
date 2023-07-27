@@ -1,15 +1,23 @@
-import Layout from '../layouts/layout'
-import type { NextPageWithLayout } from './_app'
-import { ReactElement } from 'react'
-import Image from 'next/image'
-import Image404  from '../../public/404.svg'
+import Layout from '../layouts/layout';
+import type { NextPageWithLayout } from './_app';
+import { ReactElement } from 'react';
+import Image from 'next/image';
+import Image404  from '../../public/404.svg';
+import { useRouter } from 'next/router';
 
 /**
- * 404 page
+ * 404 page.
  * 
  * @return { JSX.Element } 404 page
  */
 const Page404 = () => {
+	const router = useRouter();
+
+	// Redirect to Thanks page after successful authentication
+	if (router.asPath.includes('/auth/callback') && ! router.asPath.includes('error') ) {
+		router.push('/thanks');
+	}
+
 	return (
 		<div className='flex flex-col w-full lg:flex-row p-8'>
 			<div className='place-items-center md:max-w-2xl md:p-8'>
