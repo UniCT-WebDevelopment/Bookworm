@@ -1,5 +1,6 @@
 import Book from "@/types/Book";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * Carousel component
@@ -20,22 +21,29 @@ const Carouser = ({title, books} : {title:string, books: Book[]}) => {
 					books.map((book) => (
 						book.imageLinks?.thumbnail && (
 							<div className="carousel-item relative cursor-pointer" key={book.etag}>
-								<figure>
-									<Image
-										src={book.imageLinks?.thumbnail}
-										alt={book.title}
-										width={200}
-										height={300}
-										style={{objectFit: 'fill'}}
-										className="h-full"
-									/>
-								</figure>
-								<div className="carousel-item-caption flex items-center justify-center absolute bottom-0 w-full h-full bg-base-200 hover:bg-primary hover:bg-opacity-50 bg-opacity-50">
-									<div className="p-8">
-										<h3 className="text-xl font-bold">{book.title}</h3>
-										<p className="text-sm">{book.authors?.join(', ')}</p>
+								<Link href={`/book/${book.id}`}>
+									<figure>
+										<Image
+											src={book.imageLinks?.thumbnail}
+											alt={book.title}
+											width={300}
+											height={300}
+											style={{objectFit: 'fill'}}
+											className="h-full"
+										/>
+									</figure>
+									<div className="carousel-item-caption flex items-center justify-center absolute bottom-0 w-full h-full bg-base-200 hover:bg-primary hover:bg-opacity-50 bg-opacity-50">
+										<div className="p-8">
+											<h3 className="text-xl font-bold">{book.title}</h3>
+											<p className="text-sm">{book.authors?.join(', ')}</p>
+										</div>
 									</div>
-								</div>
+									{process.env.NODE_ENV === 'development' && (
+										<div className="absolute top-0 left-0 p-2 text-xs bg-primary bg-opacity-50 text-white">
+											{book.id}
+										</div>
+									)}
+								</Link>
 							</div>
 						)
 					))

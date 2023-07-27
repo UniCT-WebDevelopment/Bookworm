@@ -36,6 +36,8 @@ const Home = () => {
 						...books,
 						{
 							id: item.id,
+							isbn10: '',
+							isbn13: '',
 							etag: item.etag,
 							title: item.volumeInfo.title,
 							authors: item.volumeInfo.authors,

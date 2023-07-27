@@ -1,5 +1,7 @@
 interface Book {
 	id: string
+	isbn10: string
+	isbn13: string
 	etag: string
 	title: string
 	authors: string[]
