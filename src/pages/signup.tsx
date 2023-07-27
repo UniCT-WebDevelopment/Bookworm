@@ -8,11 +8,12 @@ import type { NextPageWithLayout } from './_app'
 import SignupForm from '../components/auth/SignupForm'
 
 const Signup = () => {
-	const router = useRouter()
-	const supabase = createClientComponentClient()
+	const router = useRouter();
+	const supabase = createClientComponentClient();
 
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [username, setUsername] = useState('');
 
 	const handleSignUp = async () => {
 		await supabase.auth.signUp({
@@ -21,11 +22,20 @@ const Signup = () => {
 			options: {
 				emailRedirectTo: `${location.origin}/auth/callback`,
 			},
-		})
-		router.refresh()
+		});
+
+		router.refresh();
 	}
 
-	return <SignupForm handleSignUp={handleSignUp} />
+	return <SignupForm
+		handleSignUp={handleSignUp}
+		setEmail={setEmail}
+		setPassword={setPassword}
+		setUsername={setUsername}
+		email={email}
+		password={password}
+		username={username}
+	/>
 }
 
 const getLayout = (page: ReactElement) => {
