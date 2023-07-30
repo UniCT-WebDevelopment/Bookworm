@@ -108,6 +108,7 @@ const BookPage = () => {
 						)}
 					</div>
 				</div>
+				
 				<div className="overflow-x-auto">
 							<table className="table">
 								<tbody>
@@ -120,6 +121,7 @@ const BookPage = () => {
 													<tr key={key} className='hover'>
 														<td className="font-bold">{key}</td>
 														<td>
+															{ /* @ts-ignore */ }
 															{book[key as keyof Book]}
 														</td>
 													</tr>
