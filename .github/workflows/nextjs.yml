@@ -77,6 +77,8 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          GOOGLE_BOOKS_API_VOLUMES_URL: ${{ env.GOOGLE_BOOKS_API_VOLUMES_URL }}
+          GOOGLE_BOOKS_API_FRONT_COVER_URL: ${{ env.GOOGLE_BOOKS_API_FRONT_COVER_URL }}
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
