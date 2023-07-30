@@ -28,7 +28,7 @@ const Home = () => {
 		const fetchBooks = async () => {
 			categories.map(async (category) => {
 				const res = await fetch(
-					`${process.env.GOOGLE_BOOKS_API_VOLUMES_URL}/?q=subject:${category}&maxResults=18`,
+					`${process.env.GOOGLE_BOOKS_API_VOLUMES_URL}/?q=subject:${category}&maxResults=18&langRestrict=en`,
 				);
 				const data = await res.json();
 				data?.items?.map((item: any) => {

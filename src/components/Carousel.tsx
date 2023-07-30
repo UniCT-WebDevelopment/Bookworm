@@ -20,19 +20,16 @@ const Carouser = ({title, books} : {title:string, books: Book[]}) => {
 				{
 					books.map((book) => (
 						book.imageLinks?.thumbnail && (
-							<div className="carousel-item relative cursor-pointer" key={book.etag}>
+							<div className="carousel-item relative cursor-pointer h-96" key={book.etag}>
 								<Link href={`/book/${book.id}`}>
-									<figure>
-										<Image
-											src={book.imageLinks?.thumbnail}
-											alt={book.title}
-											width={300}
-											height={300}
-											style={{objectFit: 'fill'}}
-											className="h-full"
-										/>
-									</figure>
-									<div className="carousel-item-caption flex items-center justify-center absolute bottom-0 w-full h-full bg-base-200 hover:bg-primary hover:bg-opacity-50 bg-opacity-50">
+									<Image
+										src={process.env.GOOGLE_BOOKS_API_FRONT_COVER_URL + '/' + book.id + '?fife=w400-h600&source=gbs_api'}
+										alt={book.title}
+										width={250}
+										height={320}
+										className="object-fill h-full w-full relative"
+									/>
+									<div className="carousel-item-caption flex items-center justify-center absolute bottom-4 top-4 right-4 left-4 bg-base-200 bg-opacity-30">
 										<div className="p-8">
 											<h3 className="text-xl font-bold">{book.title}</h3>
 											<p className="text-sm">{book.authors?.join(', ')}</p>
