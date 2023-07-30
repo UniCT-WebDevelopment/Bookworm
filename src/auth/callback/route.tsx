@@ -10,14 +10,35 @@ import type { NextRequest } from 'next/server'
  * @return { NextResponse } NextResponse
  */
 export async function GET(request: NextRequest) {
-
 	const requestUrl = new URL(request.url);
-	console.log(request);
 	const code = requestUrl.searchParams.get('code');
 
 	if (code) {
 		const supabase = createRouteHandlerClient({ cookies });
 		await supabase.auth.exchangeCodeForSession(code);
+
+		const { data, error } = await supabase.auth.getUser();
+
+		if(error) {
+			console.error(error);
+			return NextResponse.error();
+		}
+
+		// Create a new entry for user public profile1
+		const {user: { id, email, user_metadata: { username, favorite_genre }}} = data;
+		const { error: profileError } = await supabase.from('profiles').insert([
+			{
+				id,
+				email,
+				username,
+				favorite_genre
+			}
+		]);
+
+		if(profileError) {
+			console.error(profileError);
+			return NextResponse.error();
+		}
 
 		// Redirect thanks for subscribing page
 		return NextResponse.redirect('/thanks');
