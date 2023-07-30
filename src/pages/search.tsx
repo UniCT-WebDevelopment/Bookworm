@@ -34,6 +34,8 @@ const Search = () => {
 						id: item.id,
 						etag: item.etag,
 						title: item.volumeInfo.title,
+						isbn10: item.volumeInfo.industryIdentifiers[0].identifier,
+						isbn13: item.volumeInfo.industryIdentifiers[1].identifier,
 						authors: item.volumeInfo.authors,
 						publisher: item.volumeInfo.publisher,
 						publishedDate: item.volumeInfo.publishedDate,
