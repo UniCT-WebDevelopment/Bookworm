@@ -7,6 +7,10 @@ This project is a work in progress. I'm building it to learn Next.js and Tailwin
 
 Feel free to contribute to the project by opening a pull request or an issue.
 
+## Demo
+
+You can see a demo of the app [here](https://makapx.github.io/bookworm-nextjs/).
+
 ## Getting Started
 
 ### Setup environment variables
