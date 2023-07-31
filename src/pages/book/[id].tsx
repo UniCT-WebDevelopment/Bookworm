@@ -5,6 +5,9 @@ import { useRouter } from 'next/router';
 import Book from '@/types/Book';
 import Image from 'next/image';
 import Link from 'next/link';
+import BookExtraInfo from '@/components/BookExtraInfo';
+import BookInteractionPanel from '@/components/BookInteractionPanel';
+import ReviewBox from '@/components/ReviewBox';
 
 const BookPage = () => {
 	const [book, setBook] = useState<Book | null>(null);
@@ -15,7 +18,7 @@ const BookPage = () => {
 	const [error, setError] = useState<boolean>(false);
 	const [hqImage, setHqImage] = useState<string>('');
 
-	const excludeKeys = ['id', 'etag', 'imageLinks', 'previewLink', 'infoLink', 'authors', 'title', 'description'];
+	const excludeKeys = ['id', 'etag', 'imageLinks', 'previewLink', 'infoLink', 'description'];
 
 	useEffect(() => {
 		if(!id || loading || book ) return;
@@ -23,14 +26,11 @@ const BookPage = () => {
 		const fetchBook = async () => {
 			setLoading(true);
 			try{
-				console.log(id);
 				const res = await fetch(
 					`${process.env.GOOGLE_BOOKS_API_VOLUMES_URL}/${id}`,
 				);
 				const data = await res.json();
-				console.log(data);
 
-				console.log(data);
 				if(!data || data.error){
 					setError(true);
 					return;
@@ -39,8 +39,8 @@ const BookPage = () => {
 				setBook({
 					id: data.id,
 					etag: data.etag,
-					isbn10: data.volumeInfo.industryIdentifiers[0].identifier,
-					isbn13: data.volumeInfo.industryIdentifiers[1].identifier,
+					isbn10: data.volumeInfo.industryIdentifiers[0]?.identifier,
+					isbn13: data.volumeInfo.industryIdentifiers[1]?.identifier,
 					title: data.volumeInfo.title,
 					authors: data.volumeInfo.authors,
 					publisher: data.volumeInfo.publisher,
@@ -56,12 +56,11 @@ const BookPage = () => {
 			}
 			catch(error){
 				setError(true);
-				console.error(error);
 			}
 			setLoading(false);
 		}
 		fetchBook();
-	}, [book, id, loading])
+	}, [book, id, loading]);
 
 	//Redirect to 404 page in case of error or if book is not found
 	useEffect(() => {
@@ -79,36 +78,52 @@ const BookPage = () => {
 	return (
 		<>
 			<div>
-				<div className="flex flex-col w-full lg:flex-row">
-					<div className="grid flex-grow place-items-center">
+				<div className="flex flex-col gap-8 w-full lg:flex-row mb-8">
+					<div className="flex-grow">
 						{book && hqImage && (
 							<Image
 								src={hqImage}
-								width={300}
-								height={400}
+								width={200}
+								height={300}
 								alt={book.title}
+								className='w-full h-[300px] lg:h-[600px] object-cover'
 							/>
 						)}
 					</div>
-					<div className="grid md:basis-2/3">
-						{book && (
-							<h1 className='text-2xl font-bold'>
-								{book.title}
-							</h1>
-						)}
-						{book && book.authors && (
-							<p className="text-md mb-10">
-								by {book.authors.join(', ')}
-							</p>
-						)}
-						{book && book.description && (
-							<p className="text-md mb-10">
-								{book.description}
-							</p>
-						)}
+					<div className="grid md:basis-2/3 content-between gap-4 lg:pt-8">
+						<div>
+							{book && (
+								<h1 className='text-2xl font-bold mb-2'>
+									{book.title}
+								</h1>
+							)}
+							{book && book.authors && (
+								<p className="text-md mb-8">
+									by {book.authors.join(', ')}
+								</p>
+							)}
+							{book && book.description && (
+								<p className="text-md">
+									{book.description}
+								</p>
+							)}
+						</div>
+						
+						<div className='mx-auto'>
+							<BookExtraInfo
+								pageCount={book?.pageCount || 0}
+								language={book?.language || ''}
+								isbn13={book?.isbn13 || ''}
+								publishedDate={book?.publishedDate || ''}
+							/>
+						</div>
 					</div>
 				</div>
-				
+
+				<div className='w-full mx-auto mb-8'>
+					<BookInteractionPanel />
+				</div>
+
 				<div className="overflow-x-auto">
 							<table className="table">
 								<tbody>
@@ -134,6 +149,8 @@ const BookPage = () => {
 							</table>
 						</div>
 			</div>
+
+			<ReviewBox />
 		</>
 	)
 };
