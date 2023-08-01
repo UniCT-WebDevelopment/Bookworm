@@ -48,7 +48,7 @@ const Navbar = () => {
 					</li>
 					<li>
 						<button className="btn btn-circle bg-primary-focus hover:bg-accent border-none">
-							<Link href="/login">
+							<Link href={isAuthenticated ? '/profile' : '/login'}>
 								<IconContext.Provider value={{ size: '2rem', className: 'text-base-100' }}>
 									<BiUser />
 								</IconContext.Provider>
