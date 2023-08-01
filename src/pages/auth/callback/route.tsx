@@ -20,11 +20,10 @@ export async function GET(request: NextRequest) {
 		const { data, error } = await supabase.auth.getUser();
 
 		if(error) {
-			console.error(error);
 			return NextResponse.error();
 		}
 
-		// Create a new entry for user public profile1
+		// Create a new entry for user public profile
 		const {user: { id, email, user_metadata: { username, favorite_genre }}} = data;
 		const { error: profileError } = await supabase.from('profiles').insert([
 			{
@@ -36,7 +35,6 @@ export async function GET(request: NextRequest) {
 		]);
 
 		if(profileError) {
-			console.error(profileError);
 			return NextResponse.error();
 		}
 
