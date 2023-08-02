@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+/**
+ * Return the Hero component
+ * 
+ * @return {JSX.Element} Hero component
+ */
 const Hero = () => {
 	const [currentText, setCurrentText] = useState('');
 	const [currentIndex, setCurrentIndex] = useState(0);
@@ -25,13 +30,13 @@ const Hero = () => {
 	}, [currentIndex, delay, text]);
 
 	return(
-		<div className="hero min-h-screen bg-accent-light">
+		<div className="hero min-h-[70vh] bg-accent-light">
 			<div className="hero-content flex-col lg:flex-row">
 				<div>
 					<h1 className="text-5xl font-bold">
 						Welcome to <span className="text-primary">Bookworm</span>
 					</h1>
-					<p className="py-6 max-w-lg h-24">
+					<p className="py-6 max-w-lg h-28">
 						{currentText}
 					</p>
 					<Link href="/signup">

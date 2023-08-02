@@ -5,6 +5,9 @@ import Hero from '../components/Hero'
 import Carousel from '../components/Carousel';
 import Book from '@/types/Book';
 
+import CategoryPanel from '@/components/category/CategoryPanel';
+import CollectionPanel from '@/components/collection/CollectionPanel';
+
 const Home = () => {
 	const [books, setBooks] = useState<Book[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -62,6 +65,9 @@ const Home = () => {
 	return (
 		<>
 			<Hero />
+
+			<CategoryPanel />
+			<CollectionPanel />
 			<div className="container mx-auto my-4">
 				<h2 className="text-3xl font-bold mb-4">
 					Explore by category

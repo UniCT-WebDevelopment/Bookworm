@@ -8,7 +8,10 @@ const nextConfig = {
 		GOOGLE_BOOKS_API_FRONT_COVER_URL: process.env.GOOGLE_BOOKS_API_FRONT_COVER_URL,
 	},
 	images: {
-		domains: ['books.google.com'],
+		domains: [
+			'books.google.com',
+			'm.media-amazon.com'
+		],
 	},
 	basePath: '/bookworm-nextjs',
 }
