@@ -16,6 +16,16 @@ const CollectionPanel = () => {
 	const [collectionBooks, setCollectionBooks] = useState<CollectionBook[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
+	// Restore collections from local storage.
+	useEffect(() => {
+		if(localStorage.getItem('collections')) {
+			setCollections(JSON.parse(localStorage.getItem('collections') || '[]'));
+		}
+		if(localStorage.getItem('collectionBooks')) {
+			setCollectionBooks(JSON.parse(localStorage.getItem('collectionBooks') || '[]'));
+		}
+	}, []);
+
 	useEffect(() => {
 		if(!supabase || collections.length > 0) return;
 
@@ -28,6 +38,7 @@ const CollectionPanel = () => {
 				return
 			}
 			setCollections(collections);
+			localStorage.setItem('collections', JSON.stringify(collections));
 		};
 		getCollection();
 	}, [supabase, collections]);
@@ -71,6 +82,12 @@ const CollectionPanel = () => {
 
 		getCollectionBooks();
 	}, [collectionBooks, collections, supabase, isLoading]);
+
+	useEffect(() => {
+		if(collectionBooks.length > 0) {
+			localStorage.setItem('collectionBooks', JSON.stringify(collectionBooks));
+		}
+	}, [collectionBooks]);
 
 	return (
 		<div>

@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import Layout from '../layouts/layout';
 import { NextPageWithLayout } from './_app';
 import { useRouter } from 'next/router';
-import Book from '@/types/Book';
+import BookPreview from '@/types/BookPreview';
 import BookCard from '@/components/BookCard';
 
 /**
@@ -16,7 +16,7 @@ const Search = () => {
 	const { query } = router;
 	const { q } = query;
 
-	const [books, setBooks] = useState<Book[]>([]);
+	const [books, setBooks] = useState<BookPreview[]>([]);
 
 	useEffect(() => {
 		// If there is no query, return.
@@ -39,18 +39,9 @@ const Search = () => {
 						id: item.id,
 						etag: item.etag,
 						title: item.volumeInfo.title,
-						isbn10: item.volumeInfo?.industryIdentifiers[0]?.identifier || '',
-						isbn13: item.volumeInfo?.industryIdentifiers[1]?.identifier || '',
 						authors: item.volumeInfo.authors,
-						publisher: item.volumeInfo.publisher,
-						publishedDate: item.volumeInfo.publishedDate,
-						description: item.volumeInfo.description,
-						pageCount: item.volumeInfo.pageCount,
-						categories: item.volumeInfo.categories,
-						imageLinks: item.volumeInfo.imageLinks,
-						language: item.volumeInfo.language,
-						previewLink: item.volumeInfo.previewLink,
-						infoLink: item.volumeInfo.infoLink,
+						category: item.volumeInfo.categories ? item.volumeInfo.categories[0] : '',
+						thumbnail: item.volumeInfo.imageLinks?.thumbnail,
 					},
 				]);
 			});

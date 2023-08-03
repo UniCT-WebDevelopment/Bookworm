@@ -1,22 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import Book from '@/types/Book';
+import BookPreview from '@/types/BookPreview';
 
 /**
  * Render a book card
  * 
- * @param {Book} book Book object
+ * @param {BookPreview} book Book object
  * @return {JSX.Element} Book card component
  */
-const BookCard = ({ book }: { book: Book }) => {
+const BookCard = ({ book }: { book: BookPreview }) => {
 	return (
 		<div className="card card-side bg-base-100 shadow-xl">
-			{book.imageLinks && (
+			{book?.thumbnail && (
 				<Image
-					src={book.imageLinks?.thumbnail}
+					src={book.thumbnail}
 					alt={book.title}
-					width={book.imageLinks.thumbnail ? 128 : 0}
-					height={book.imageLinks?.thumbnail ? 192 : 0}
+					width={book.thumbnail ? 128 : 0}
+					height={book.thumbnail ? 192 : 0}
 				/>
 			)}
 			<div className="card-body">
@@ -27,16 +27,14 @@ const BookCard = ({ book }: { book: Book }) => {
 					{book.authors?.join(', ')}
 				</p>
 				<p>
-					{book.categories?.map((category) => (
-						<Link
-							href={`/category/${category
-								.toLowerCase()
-								.replace(' ', '-')}`}
-							key={category}
-						>
-							{category}
-						</Link>
-					))}
+					<Link
+						href={`/category/${book.category
+							.toLowerCase()
+							.replace(' ', '-')}`}
+						key={book.category}
+					>
+						{book.category}
+					</Link>
 				</p>
 				<div className="card-actions justify-end">
 					<Link href={`/book/${book.id}`}>
@@ -47,7 +45,7 @@ const BookCard = ({ book }: { book: Book }) => {
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default BookCard
+export default BookCard;
