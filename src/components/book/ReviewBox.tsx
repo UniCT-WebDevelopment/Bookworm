@@ -1,10 +1,18 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
-
-const ReviewBox = () => {
+import type User from '@/types/User';
+/**
+ * ReviewBox component
+ * 
+ * @return {JSX.Element} ReviewBox component
+ */
+const ReviewBox = ( { bookId }:{ bookId : string|undefined } ) => {
 	const supabase = createClientComponentClient();
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [numberOfCharacters, setNumberOfCharacters] = useState(0);
+	const [review, setReview] = useState('');
+	const [user, setUser] = useState<User | null>(null);
+	const [reviewInserted, setReviewInserted] = useState(false);
 
 	useEffect(() => {
 		const getUser = async () => {
@@ -15,14 +23,37 @@ const ReviewBox = () => {
 			}
 
 			setIsAuthenticated(true);
-		}
+			setUser({
+				id: user.id,
+				email: user.email ? user.email : '',
+				username: user.user_metadata.username,
+				favoriteGenre: user.user_metadata.favorite_genre
+			});
+		};
 		getUser();
 	}, [supabase]);
 
 	const handleReviewChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setNumberOfCharacters(event.target.value.length);
+		setReview(event.target.value);
 	};
 
+	const handleSubmit = async () => {
+		if( !review || review.length === 0 || review.length > 500 || !user || !bookId ){
+			return;
+		}
+
+		setReviewInserted(true);
+
+		const { data, error } = await supabase.from('reviews').insert([
+			{
+				user_id: user.id,
+				book_id: bookId,
+				content: review,
+				username: user.username
+			}
+		]);
+	}
 
 	return (
 		<>
@@ -36,7 +67,7 @@ const ReviewBox = () => {
 					>
 					</textarea>
 				)}
-				{isAuthenticated && (
+				{isAuthenticated && !reviewInserted && (
 					<>
 						<div className='relative w-full'>
 							<textarea
@@ -52,16 +83,29 @@ const ReviewBox = () => {
 							</p>
 						</div>
 						</div>
-						
-					
+
 						<button
 							className='btn btn-accent text-base-100'
-							disabled={numberOfCharacters === 0 || numberOfCharacters >= 500}
+							disabled={numberOfCharacters === 0 || numberOfCharacters >= 500 || reviewInserted }
+							onClick={handleSubmit}
 						>
 							Submit
 						</button>
 						
 					</>
+				)}
+				{isAuthenticated && reviewInserted && (
+					<div className='flex flex-col gap-4'>
+						<p className='text-base-content'>
+							Thank you for your review!
+						</p>
+						<button
+							className='btn btn-accent text-base-100'
+							onClick={() => setReviewInserted(false)}
+						>
+							Write another review
+						</button>
+					</div>
 				)}
 			</div>
 		</>

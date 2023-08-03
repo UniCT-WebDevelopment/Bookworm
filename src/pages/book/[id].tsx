@@ -4,10 +4,10 @@ import Layout from '../../layouts/layout';
 import { useRouter } from 'next/router';
 import Book from '@/types/Book';
 import Image from 'next/image';
-import Link from 'next/link';
 import BookExtraInfo from '@/components/BookExtraInfo';
 import BookInteractionPanel from '@/components/BookInteractionPanel';
-import ReviewBox from '@/components/ReviewBox';
+import ReviewBox from '@/components/book/ReviewBox';
+import PublicReviews from '@/components/book/PublicReviews';
 
 const BookPage = () => {
 	const [book, setBook] = useState<Book | null>(null);
@@ -150,7 +150,8 @@ const BookPage = () => {
 						</div>
 			</div>
 
-			<ReviewBox />
+			<PublicReviews bookId={book?.id}/>
+			<ReviewBox bookId={book?.id}/>
 		</>
 	)
 };
