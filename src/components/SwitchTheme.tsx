@@ -7,25 +7,33 @@ import {BiPaint} from "react-icons/bi";
  * @returns {JSX.Element} The switch theme button
  */
 const SwitchTheme = () => {
+
 	const supportedThemes = [
 		// Add more themes here
 		"bookworm",
-		"light",
-		"dark",
-		"cupcake",
-		"coffee",
+		"bookworm_cupcake",
+		"bookworm_mint",
+		"bookworm_dark",
 	];
-	const [theme, setTheme] = useState("bookworm");
 
-	// TODO: Add a way to save the theme in local storage or to the user's account
+	const [theme, setTheme] = useState("");
+
+	useEffect(() => {
+		const localTheme = localStorage.getItem("bookwormTheme");
+		if(localTheme) {
+			setTheme(localTheme);
+		}
+	}, []);
+
 
 	const switchTheme = () => {
 		setTheme(supportedThemes[(supportedThemes.indexOf(theme) + 1) % supportedThemes.length] as string);
+		localStorage.setItem("bookwormTheme", supportedThemes[(supportedThemes.indexOf(theme) + 1) % supportedThemes.length] as string);
 	};
 
 	useEffect(() => {
-		const body = document.body;
-		body.setAttribute("data-theme", theme);
+		if(!theme) return;
+		document.body.setAttribute("data-theme", theme);
 	}, [theme]);
 
 	return (
