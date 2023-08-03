@@ -1,7 +1,7 @@
 # Bookworm: a Next.js app
 
 Bookworm is a simple web app that allows you to keep track of the books you've read. It's built with [Next.js](https://nextjs.org/), TypeScript, and Tailwind CSS.
-It uses [Supabase](https://supabase.io/) as a backend to store user data and [Prisma](https://www.prisma.io/nextjs) as cache to reduce the number of requests to the Google Books API.
+It uses [Supabase](https://supabase.io/) as a backend to store user data. Uses Google Books API to fetch book data.
 
 This project is a work in progress. I'm building it to learn Next.js and Tailwind CSS, and to experiment with Supabase and Prisma. I'm also using it as a way to keep track of the books I've read.
 
