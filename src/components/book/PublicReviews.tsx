@@ -27,6 +27,7 @@ const PublicReviews = ({bookId} : {bookId : string|undefined}) => {
 						bookId: review.book_id,
 						userId: review.user_id,
 						userName: review.username,
+						bookTitle: review.book_title,
 						content: review.content,
 						createdAt: review.created_at
 					}]

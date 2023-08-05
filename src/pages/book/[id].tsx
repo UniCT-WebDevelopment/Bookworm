@@ -151,7 +151,7 @@ const BookPage = () => {
 			</div>
 
 			<PublicReviews bookId={book?.id}/>
-			<ReviewBox bookId={book?.id}/>
+			<ReviewBox bookId={book?.id} bookTitle={book?.title || ''}/>
 		</>
 	)
 };

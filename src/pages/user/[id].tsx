@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 import type User from '@/types/User';
+import UserPublicReviews from '@/components/user/UserPublicReviews';
 
 /**
  * User public page.
@@ -16,6 +17,7 @@ const UserPublicPage = () => {
 	const supabase = createClientComponentClient();
 	const router = useRouter();
 	const [userInfo, setUserInfo] = useState<User | null>(null);
+
 
 	useEffect(() => {
 		if(userInfo || !router.query.id) return;
@@ -43,9 +45,12 @@ const UserPublicPage = () => {
 	return <>
 		{userInfo && (
 			<>
-				<h1>
-					{userInfo.username}
+				<h1 className='text-xl'>
+					Your are viewing <b className='text-accent'>{userInfo.username}</b>&apos;s profile.
 				</h1>
+				<div className='max-w-sm'>
+					<UserPublicReviews userId={userInfo.id} />
+				</div>
 			</>
 		)}
 	</>

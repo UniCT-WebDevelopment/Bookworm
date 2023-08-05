@@ -18,6 +18,7 @@ const Signup = () => {
 	const [retypePassword, setRetypePassword] = useState('');
 	const [username, setUsername] = useState('');
 	const [favoriteGenre, setFavoriteGenre] = useState('');
+	const [error, setError] = useState('');
 
 	// TODO: Move this to a separate file.
 	const allowedGenres = [
@@ -45,7 +46,7 @@ const Signup = () => {
 	];
 
 	const handleSignUp = async () => {
-		await supabase.auth.signUp({
+		const { data, error } = await supabase.auth.signUp({
 			email,
 			password,
 			options: {
@@ -56,6 +57,11 @@ const Signup = () => {
 				}
 			},
 		});
+
+		if(error) {
+			setError(error.message);
+			return;
+		}
 
 		router.refresh();
 	}
@@ -76,6 +82,7 @@ const Signup = () => {
 					favoriteGenre={favoriteGenre}
 					setFavoriteGenre={setFavoriteGenre}
 					allowedGenres={allowedGenres}
+					error={error}
 				/>
 			</div> 
 			<div className="place-items-center self-center">

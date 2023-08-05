@@ -7,6 +7,8 @@ import type { NextPageWithLayout } from './_app';
 import type User from '@/types/User';
 import SideInfo from '@/components/user/SideInfo';
 
+import ShareYourIDPanel from '@/components/user/ShareIDPanel';
+
 /**
  * Profile page.
  * 
@@ -50,7 +52,7 @@ const Profile = () => {
 				)}
 			</h1>
 			<div className="flex flex-col w-full lg:flex-row">
-				<div className="grid flex-grow max-w-md">
+				<div className="flex-grow max-w-md flex flex-col justify-between gap-12">
 					<div>
 						<h3 className='mb-2'>
 							Every day is a good day to read a book!<br />
@@ -63,7 +65,9 @@ const Profile = () => {
 							</button>
 						</div>
 					</div>
+					<ShareYourIDPanel userId={userInfo?.id || ''} />
 				</div>
+
 				<div className="divider lg:divider-horizontal"></div>
 				<div className='grid flex-grow'>
 					<SideInfo />

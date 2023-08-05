@@ -6,7 +6,7 @@ import type User from '@/types/User';
  * 
  * @return {JSX.Element} ReviewBox component
  */
-const ReviewBox = ( { bookId }:{ bookId : string|undefined } ) => {
+const ReviewBox = ( { bookId, bookTitle }:{ bookId : string|undefined, bookTitle : string } ) => {
 	const supabase = createClientComponentClient();
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [numberOfCharacters, setNumberOfCharacters] = useState(0);
@@ -49,6 +49,7 @@ const ReviewBox = ( { bookId }:{ bookId : string|undefined } ) => {
 			{
 				user_id: user.id,
 				book_id: bookId,
+				book_title: bookTitle,
 				content: review,
 				username: user.username
 			}

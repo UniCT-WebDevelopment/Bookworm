@@ -15,6 +15,7 @@ const SignupForm = (
 		retypePassword,
 		favoriteGenre,
 		allowedGenres,
+		error
 	} : SignupFormProps,
 ) => {
 	const [notice, setNotice] = useState<string | null>(null);
@@ -143,6 +144,7 @@ const SignupForm = (
 				>
 					{notice ? notice : 'Sign up'}
 				</button>
+				{error && <p className="text-red-500">{error}</p>}
 			</div>
 		</div>
 	)

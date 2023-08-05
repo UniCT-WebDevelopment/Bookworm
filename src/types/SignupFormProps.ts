@@ -30,6 +30,7 @@ interface SignupFormProps {
 	setUsername: (username: string) => void
 	setRetypePassword: (retypePassword: string) => void
 	setFavoriteGenre: (favoriteGenre: string) => void
+	error: string
 }
 
 export default SignupFormProps
