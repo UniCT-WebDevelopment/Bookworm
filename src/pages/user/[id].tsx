@@ -18,12 +18,10 @@ const UserPublicPage = () => {
 	const router = useRouter();
 	const [userInfo, setUserInfo] = useState<User | null>(null);
 
-
 	useEffect(() => {
 		if(userInfo || !router.query.id) return;
 
 		const getUserById = async () => {
-			console.log(router.query.id);
 			const { data: profiles, error } = await supabase.from('profiles').select('*').eq('id', router.query.id).single();
 
 			if(error) {

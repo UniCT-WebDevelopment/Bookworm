@@ -1,5 +1,5 @@
 import { IconContext } from 'react-icons';
-import { BiUser, BiLogOutCircle } from 'react-icons/bi';
+import { BiUser, BiLogOutCircle, BiMessageRounded } from 'react-icons/bi';
 import SwitchTheme from './SwitchTheme';
 import Link from 'next/link';
 import logo from '../../public/logowhite.svg';
@@ -54,6 +54,17 @@ const Navbar = () => {
 								</IconContext.Provider>
 							</Link>
 						</button>
+					</li>
+					<li>
+						<Link href="/community">
+						<button
+							className="btn btn-circle bg-primary-focus hover:bg-accent border-none"
+						>
+							<IconContext.Provider value={{ size: '2rem', className: 'text-base-100' }}>
+								<BiMessageRounded />
+							</IconContext.Provider>
+						</button>
+						</Link>
 					</li>
 					<li>
 						<SwitchTheme />
