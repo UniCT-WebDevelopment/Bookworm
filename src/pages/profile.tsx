@@ -3,11 +3,12 @@ import Layout from '../layouts/layout';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/router';
 
+import SideInfo from '@/components/user/SideInfo';
+import ShareYourIdeasPanel from '@/components/user/ShareYourIdeasPanel';
+import ShareYourIDPanel from '@/components/user/ShareIDPanel';
+
 import type { NextPageWithLayout } from './_app';
 import type User from '@/types/User';
-import SideInfo from '@/components/user/SideInfo';
-
-import ShareYourIDPanel from '@/components/user/ShareIDPanel';
 
 /**
  * Profile page.
@@ -18,9 +19,6 @@ const Profile = () => {
 	const supabase = createClientComponentClient();
 	const router = useRouter();
 	const [userInfo, setUserInfo] = useState<User | null>(null);
-
-	// TODO: Implement page counter.
-	const [pageCounter, setPageCounter] = useState(0);
 
 	useEffect(() => {
 		if (userInfo) return
@@ -53,18 +51,7 @@ const Profile = () => {
 			</h1>
 			<div className="flex flex-col w-full lg:flex-row">
 				<div className="flex-grow max-w-md flex flex-col justify-between gap-12">
-					<div>
-						<h3 className='mb-2'>
-							Every day is a good day to read a book!<br />
-							Share your throughs with the community.
-						</h3>
-						<div className="form-control">
-							<textarea className="textarea h-24 textarea-bordered" placeholder="Enter your answer here"></textarea>
-							<button className="btn btn-primary mt-4">
-								Share
-							</button>
-						</div>
-					</div>
+					<ShareYourIdeasPanel userId={userInfo?.id || ''} />
 					<ShareYourIDPanel userId={userInfo?.id || ''} />
 				</div>
 

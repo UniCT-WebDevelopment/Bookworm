@@ -50,10 +50,7 @@ const UserPublicReviews = ({ userId } : { userId : String }) => {
 
 	return (
 		<>
-			<h3 className="text-xl font-bold mb-2">
-				Last reviews
-			</h3>
-			<div className="bg-base-200 p-8 rounded-sm shadow-sm">
+			<div>
 				{publicReviews.length === 0 && (
 					<p>
 						Seems like there are no reviews yet.
